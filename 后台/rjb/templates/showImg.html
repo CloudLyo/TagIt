@@ -1,0 +1,14 @@
+<DOCTYPE html>
+
+<html>
+<body>
+	{% for url, ptags in urls %}
+	<img src={{url}} alt='cannot find img'><br>
+		{% for tag in ptags %}
+		标签：{{tag.tag}} 频数：{{tag.frequent}}<br>
+		{% endfor %}
+	<hr>
+	{% endfor %}
+</body>
+</html>
+

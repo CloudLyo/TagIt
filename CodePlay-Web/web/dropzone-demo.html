@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.default.mobile.min.css" />
+    <link href="css/examples.css"/>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2017.2.504/js/kendo.all.min.js"></script>
+</head>
+<style>
+    .dropZoneElement {
+        position: relative;
+        display: inline-block;
+        background-color: #f8f8f8;
+        border: 1px solid #c7c7c7;
+        width: 230px;
+        height: 110px;
+        text-align: center;
+    }
+    .textWrapper {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        font-size: 24px;
+        line-height: 1.2em;
+        font-family: Arial,Helvetica,sans-serif;
+        color: #000;
+    }
+    .dropImageHereText {
+        color: #c7c7c7;
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+    .product {
+        float: left;
+        position: relative;
+        margin: 0 10px 10px 0;
+        padding: 0;
+    }
+    .product img {
+        width: 110px;
+        height: 110px;
+    }
+    .wrapper:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+</style>
+<body>
+<div id="exampleWrap">
+    <script>$("#exampleWrap").css("visibility", "hidden");</script>
+    <div id="example" class="k-content">
+        <div class="demo-section k-content wide">
+            <div class="wrapper">
+                <div id="products"></div>
+                <div class="dropZoneElement">
+                    <div class="textWrapper">
+                        <p><span>+</span>Add Image</p>
+                        <p class="dropImageHereText">Drop image here to upload</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input name="img" id="files" type="file" />
+    </div>
+</div>
+</body>
+<script type="text/x-kendo-template" id="template">
+    <div class="product">
+        <img src="" alt=";" />
+    </div>
+</script>
+
+<script>
+    $(function () {
+        var template = kendo.template($("#template").html());
+        var initialFiles = [];
+
+        $("#products").html(kendo.render(template, initialFiles));
+
+        $("#files").kendoUpload({
+            async: {
+                saveUrl: "http://114.115.212.203:8001/uploadImg/",
+                removeUrl: "remove",
+                autoUpload: true
+            },
+            validation: {
+                allowedExtensions: [".jpg", ".jpeg", ".png", ".bmp", ".gif"]
+            },
+            success: onSuccess,
+            showFileList: false,
+            dropZone: ".dropZoneElement"
+        });
+
+        function onSuccess(e) {
+            if (e.operation === "upload") {
+                for (var i = 0; i < e.files.length; i++) {
+                    var file = e.files[i].rawFile;
+                    if (file) {
+                        var reader = new FileReader();
+                        reader.onloadend = function () {
+                            $("<div class='product'><img src=" + this.result + " /></div>").appendTo($("#products"));
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+            }
+        }
+    });
+</script>
+<script>
+    $(function(){ $("#exampleWrap").css("visibility", ""); });
+</script>
+</html>

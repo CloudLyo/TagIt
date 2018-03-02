@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.3.3/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <a>个人信息</a>
+    <button id="clk">点击</button>
+    <span id="show">这里</span>
+</body>
+<script type="text/javascript">
+    $(document).ready(function (){
+//        $.ajax({
+//            url: 'http://114.115.212.203:8001/do_login/',
+//            type: 'POST',
+//            data: {
+//                "name": "admin",
+//                "pwd": "9876543210"
+//            },
+//            dataType: "json",
+//            success: function (returndata) {
+//                console.log(returndata.msg);
+//            },
+//            error: function (returndata) {
+//                console.log(returndata.msg);
+//            }
+//        });
+
+        $.ajax({
+            url: 'http://114.115.212.203:8001/info/',
+            type: 'GET',
+            dataType: 'json',
+            cache: false,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (returndata) {
+                console.log(returndata);
+                $('#span').load('index.html');
+            },
+            error: function (returndata) {
+                console.log(returndata);
+            }
+        });
+
+    });
+</script>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+<body>
+	<img src={{url}} alt="cannot find img"><br>
+	已有标签状态：<br>
+
+	{% for tag in tags %}
+	{{tag.tag}} : {{tag.frequent}} <br/>
+	{% endfor %}
+
+	<form action="/tagit/" method="post">
+		<input type="hidden" value="{{pid}}" name="pid" /><br>
+		标记: <input type="text" name="tag" /><br>
+		<input type="submit" name="submit" /><br>
+	</form>
+</body>
+<html>

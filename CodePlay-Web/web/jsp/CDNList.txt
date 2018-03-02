@@ -1,0 +1,32 @@
+// jQuery
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+https://github.com/js-cookie/js-cookie
+
+// Bootstrap
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://cdn.bootcss.com/bootstrap3-dialog/1.35.4/css/bootstrap-dialog.min.css">
+<script src="https://cdn.bootcss.com/bootstrap3-dialog/1.35.4/js/bootstrap-dialog.min.js"></script>
+
+// Angular
+<script src="https://cdn.bootcss.com/angular.js/2.0.0-beta.17/angular2.min.js"></script>
+<script src="https://cdn.bootcss.com/angular.js/2.0.0-beta.17/angular2-polyfills.min.js"></script>
+<script src="https://cdn.bootcss.com/angular.js/2.0.0-beta.17/angular2-all.umd.min.js"></script>
+<script src="https://cdn.bootcss.com/angular.js/2.0.0-beta.17/http.min.js"></script>
+<script src="https://cdn.bootcss.com/angular.js/2.0.0-beta.17/router.min.js"></script>
+
+
+// Vue.js
+<script src="https://cdn.bootcss.com/vue/2.3.3/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/vue-router/2.5.3/vue-router.min.js"></script>
+<script src="https://cdn.bootcss.com/vuex/2.3.1/vuex.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+// clipboard.js
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+
+// Dropzone.js
+<link href="https://cdn.bootcss.com/dropzone/5.1.0/min/dropzone.min.css">
+<script src="https://cdn.bootcss.com/dropzone/5.1.0/min/dropzone.min.js"></script>
+<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>

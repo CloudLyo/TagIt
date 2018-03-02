@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="./css/register-login.css">
+</head>
+<body>
+<div id="box"></div>
+<div class="cent-box">
+    <div class="cent-box-header">
+        <h1 class="main-title hide">图片认知分类系统后台</h1>
+        <h2 class="sub-title">管理员登录</h2>
+    </div>
+    <div class="cont-main clearfix">
+        <div class="index-tab">
+            <div class="index-slide-nav">
+                <a href="login.html" class="active">登录</a>
+                <a href="register.html">注册</a>
+                <div class="slide-bar"></div>
+            </div>
+        </div>
+        <div class="login form">
+            <div class="group">
+                <div class="group-ipt email">
+                    <input type="text" name="name" id="name" class="ipt" placeholder="请输入用户名" required>
+                </div>
+                <div class="group-ipt password">
+                    <input type="password" name="password" id="pwd" class="ipt" placeholder="输入登录密码" required>
+                </div>
+            </div>
+        </div>
+        <div class="button">
+            <button type="button" class="login-btn register-btn" id="button">登录</button>
+        </div>
+        <div class="remember clearfix">
+            <label class="remember-me"><span class="icon"><span class="zt"></span></span>
+                <input type="checkbox" name="remember-me" id="remember-me" class="remember-mecheck" checked>记住我</label>
+            <label class="forgot-password">
+                <a href="#">忘记密码？</a>
+            </label>
+        </div>
+    </div>
+</div>
+</body>
+<script src='js/jquery.min.js' type="text/javascript"></script>
+<script src='js/particles.js' type="text/javascript"></script>
+<script src='js/background.js' type="text/javascript"></script>
+<script src='js/layer/layer.js' type="text/javascript"></script>
+<script type="text/javascript">
+    $("#button").click(function() {
+        var name = $("#name").val();
+        var pwd = $("#pwd").val();
+        var verify = $("#verify").val();
+
+        if($("#name").val() === '') {
+            alert("用户名不能为空");
+        } else if($("#pwd").val() === '') {
+            alert("密码不能为空")
+        } else if($("#verify").val() === '') {
+            alert("验证码不能为空")
+        } else {
+            $.ajax({
+                url: 'http://114.115.212.203:8001/do_login/',
+                type: 'POST',
+                xhrFields: {
+                    withCredentials: true
+                },
+                dataType: "json",
+                data: {
+                    'name':name,
+                    'pwd':pwd
+                },
+                success: function(returndata){
+                    console.log(returndata);
+                    console.log(returndata.statu_code);
+                    if (returndata.msg==="ok") {
+                        window.location.href = "/index.html";
+                    } else {
+                        alert("密码错误！");
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
+        }
+    });
+</script>
+<script>
+    $('.imgcode').hover(function(){
+        layer.tips("看不清？点击更换", '.verify', {
+            time: 6000,
+            tips: [2, "#3c3c3c"]
+        })
+    },function(){
+        layer.closeAll('tips');
+    }).click(function(){
+        $(this).attr('src','/createImageCode/' + Math.random());
+    });
+    $("#remember-me").click(function(){
+        var n = document.getElementById("remember-me").checked;
+        if(n){
+            $(".zt").show();
+        }else{
+            $(".zt").hide();
+        }
+    });
+</script>
+<script>
+    var code="" ; //在全局定义验证码
+    function createCode(){
+        code = "";
+        var codeLength = 6;//验证码的长度
+        var checkCode = document.getElementById("checkCode");
+        checkCode.value = "";
+        var selectChar = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z');
+
+        for(var i=0;i<codeLength;i++) {
+            var charIndex = Math.floor(Math.random()*32);
+            code +=selectChar[charIndex];
+        }
+        if(code.length != codeLength){
+            createCode();
+        }
+        document.getElementById("checkCode").innerHTML = code;
+    }
+
+    function validate () {
+        var inputCode = document.getElementById("checkNum").value.toUpperCase();
+        if(inputCode.length <=0) {
+            alert("请输入验证码！");
+            return false;
+        }
+        else if(inputCode != code ){
+            alert("验证码输入错误！");
+            createCode();
+            return false;
+        }
+        else {
+            alert("验证码通过！");
+            return true;
+        }
+    }
+</script>
+</html>

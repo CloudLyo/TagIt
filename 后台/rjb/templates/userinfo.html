@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+<body>
+	id: {{user.id}}<br>
+	用户名: {{user.uname}}<br>
+	电子邮件: {{user.uemail}}<br>
+    身份：{{user.uidentity}}<br>
+    性别： {{user.usex}}<br>
+    诚信值： {{user.uhonesty}}<br>
+	
+	用户历史记录及频数：<br>
+
+	{% for tag in tags %}
+		标签：{{tag.tag}} 频数：{{tag.frequent}}<br>
+	{% endfor %}
+</body>
+</html>
